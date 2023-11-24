@@ -1,0 +1,382 @@
+@font-face {
+  font-family: "xkcd";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font/xkcd-script.woff") format("woff"), url("../font/xkcd-script.ttf") format("truetype");
+}
+:where(*, *::before, *::after) {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:where(html, body) {
+  height: 100%;
+}
+
+:where(body) {
+  font-size: 20px;
+  font-family: xkcd, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(img, picture, video, canvas, svg) {
+  max-width: 100%;
+  display: block;
+}
+
+:where(input, button, textarea, select) {
+  font: inherit;
+}
+
+:where(a, p, h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* fallback */
+@font-face {
+  font-family: "Material Symbols Outlined";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../font/symbols.woff2") format("woff2");
+}
+.icon {
+  font-family: "Material Symbols Outlined";
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+button,
+[role=button] {
+  transition: box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+button,
+[role=button], article {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+button:hover,
+[role=button]:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+header {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.icon-button {
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  color: var(--content-colour);
+  margin-right: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .icon-button {
+    transition: background-color 0.2s ease-in-out;
+  }
+}
+.icon-button:hover, .icon-button:focus {
+  outline: none;
+  background-color: var(--content-border);
+}
+
+body {
+  height: auto;
+  text-transform: uppercase;
+  background-color: #121212;
+  text-align: center;
+  color: #cccccc;
+  --content-colour: #cccccc;
+  --content-border: rgba(204, 204, 204, 0.16);
+  --background: #121212;
+  display: grid;
+  grid-template-areas: "header header header" "_left main _right";
+  grid-template-rows: 64px 1fr;
+}
+@media (max-width: 600px) {
+  body {
+    grid-template-columns: 16px 1fr 16px;
+  }
+}
+@media (min-width: 601px) and (max-width: 905px) {
+  body {
+    grid-template-columns: 32px 1fr 32px;
+  }
+}
+@media (min-width: 906px) and (max-width: 1240px) {
+  body {
+    grid-template-columns: 1fr 840px 1fr;
+  }
+}
+@media (min-width: 1241px) and (max-width: 1440px) {
+  body {
+    grid-template-columns: 200px 1fr 200px;
+  }
+}
+@media (min-width: 1441px) {
+  body {
+    grid-template-columns: 1fr 1040px 1fr;
+  }
+}
+
+.icon {
+  padding: 8px;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  grid-area: header;
+  width: 100%;
+  height: 64px;
+  line-height: 64px;
+  z-index: 50;
+  background-color: #242424;
+  color: #ffffff;
+  --content-colour: #ffffff;
+  --content-border: rgba(255, 255, 255, 0.16);
+  --background: #242424;
+  text-align: center;
+  margin-bottom: 16px;
+}
+header > h1 {
+  font-size: 36px;
+  margin: 0;
+  padding: 0;
+}
+
+button,
+[role=button] {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #bb86fc;
+  color: #000000;
+  text-align: center;
+  margin: 8px;
+  height: 48px;
+  padding: 16px;
+  line-height: calc(2em - 32px);
+  border-radius: 8px;
+}
+button:disabled,
+[role=button]:disabled {
+  background-color: var(--content-border);
+  color: var(--content-colour);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  grid-area: main;
+  gap: 16px;
+  z-index: 10;
+  padding: 16px 0;
+  text-align: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  main {
+    transition: filter 0.2s ease-in-out;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+a:not([role=button]) {
+  color: #bb86fc;
+  font-weight: bold;
+}
+a:not([role=button]):visited {
+  color: #03dac6;
+}
+a:not([role=button]):hover {
+  text-decoration: underline;
+}
+a[role=button] {
+  padding-left: 4px;
+}
+
+hr {
+  border-color: var(--content-border);
+}
+
+article {
+  text-align: left;
+  border-radius: 16px;
+  background-color: #242424;
+  color: #ffffff;
+  --content-colour: #ffffff;
+  --content-border: rgba(255, 255, 255, 0.16);
+  --background: #242424;
+  padding: 16px;
+}
+article:has(> hr:last-child) {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+article:has(> hr:first-child) {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+article > form {
+  display: grid;
+  grid-template-areas: "score found op1 expired_ x100 result" "score div   div div      x100 result" "score today op2 birthday x100 result";
+  grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+}
+article > form > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+article > form > #score {
+  grid-area: score;
+}
+article > form > #found {
+  grid-area: found;
+}
+article > form > #op1 {
+  grid-area: op1;
+}
+article > form > #expire {
+  grid-area: expired_;
+}
+article > form > #today {
+  grid-area: today;
+}
+article > form > #op2 {
+  grid-area: op2;
+}
+article > form > #birthday {
+  grid-area: birthday;
+}
+article > form > #x100 {
+  grid-area: x100;
+}
+article > form > #result {
+  grid-area: result;
+}
+article > form > hr {
+  grid-area: div;
+}
+
+label {
+  position: absolute;
+  top: 10px;
+  left: 14px;
+  color: var(--content-border);
+  background-color: var(--background);
+  padding: 0 4px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  label {
+    transition: color 0.2s ease-in-out, opacity 0.2s ease-in-out, top 0.2s ease-in-out, left 0.2s ease-in-out, font-size 0.2s ease-in-out;
+  }
+}
+:focus-within > label, :where([role="textbox"]:not(:empty), input:not(:placeholder-shown), select) ~ label {
+  top: 4px;
+  left: 18px;
+  font-size: 0.8em;
+}
+:focus-within > label {
+  opacity: 1;
+  color: #bb86fc;
+}
+
+p[role=textbox],
+input,
+select {
+  display: block;
+  background: transparent;
+  line-height: 1.6;
+  margin: 16px 8px;
+  padding: 8px;
+  padding-top: 18px;
+  width: calc(100% - 16px);
+  min-height: calc(1em + 16px);
+  border-radius: 8px;
+  color: var(--content-colour);
+  border: 2px solid;
+  border-color: var(--content-border);
+  position: sticky;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+@media (prefers-reduced-motion: no-preference) {
+  p[role=textbox],
+input,
+select {
+    transition: border-color 0.2s ease-in-out;
+  }
+}
+p[role=textbox]:focus,
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #bb86fc;
+}
+p[role=textbox]::-ms-expand,
+input::-ms-expand,
+select::-ms-expand {
+  display: none;
+}
+p[role=textbox]:disabled,
+input:disabled,
+select:disabled {
+  color: var(--content-border);
+  cursor: not-allowed;
+}
+
+input[type=date] {
+  position: relative;
+}
+
+input[type=date]::-webkit-calendar-picker-indicator {
+  color: transparent;
+  background: none;
+  z-index: 1;
+}
+
+input[type=date]:before {
+  color: transparent;
+  background: none;
+  display: block;
+  font-family: "Material Symbols Outlined";
+  content: "calendar_today";
+  line-height: 1;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: var(--content-colour);
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "xkcd";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font/xkcd-script.woff") format("woff"), url("../font/xkcd-script.ttf") format("truetype");
+}
+
+/*# sourceMappingURL=xkcd.css.map */

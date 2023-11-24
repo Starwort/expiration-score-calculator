@@ -1,0 +1,40 @@
+@font-face {
+  font-family: "xkcd";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font/xkcd-script.woff") format("woff"), url("../font/xkcd-script.ttf") format("truetype");
+}
+:where(*, *::before, *::after) {
+  position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:where(html, body) {
+  height: 100%;
+}
+
+:where(body) {
+  font-size: 20px;
+  font-family: xkcd, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+:where(img, picture, video, canvas, svg) {
+  max-width: 100%;
+  display: block;
+}
+
+:where(input, button, textarea, select) {
+  font: inherit;
+}
+
+:where(a, p, h1, h2, h3, h4, h5, h6) {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/*# sourceMappingURL=reset.css.map */

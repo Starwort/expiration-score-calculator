@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Expiration Date Score Calculator</title>
+        <link rel="stylesheet" href="css/dark.css"
+              media="(prefers-color-scheme: dark)" />
+        <link rel="stylesheet" href="css/light.css"
+              media="(prefers-color-scheme: light)" />
+        <script>
+            // If media queries aren't supported, just default to light
+            if (window.matchMedia('(prefers-color-scheme: dark)').media === 'not all') {
+                document.documentElement.style.display = 'none';
+                document.head.insertAdjacentHTML(
+                    'beforeend',
+                    `<link rel="stylesheet" href="css/light.css" onload="document.documentElement.style.display = ''">`,
+                );
+            }
+        </script>
+    </head>
+
+    <body>
+
+        <header>
+            <h1>Expiration Date Score Calculator</h1>
+        </header>
+
+        <main>
+            <article style="margin:auto">
+                <a href="https://xkcd.com/2178" margin="16px">
+                    <img src="https://imgs.xkcd.com/comics/expiration_date_high_score.png"
+                         style="aspect-ratio:419/634;width:419px"
+                         alt="Expiration Date High Score"
+                         title="&quot;Wait, we've MOVED since 2010. How on Earth did--&quot; &quot;Look, some of us were just born to be champions.&quot;" />
+                </a>
+            </article>
+            <article>
+                <p>Enter your expiration date and birthday to calculate your score.</p>
+
+                <form>
+                    <div id="score">score = </div>
+                    <div id="found">
+                        <input type="date" id="found-box" value="1970-01-01" disabled />
+                        <label for="found-box">Date Found:
+                        </label>
+                    </div>
+                    <div id="op1">-</div>
+                    <div id="expire">
+                        <input type="date" id="expire-box" value="1970-01-01"
+                               onchange="recalculateScore()" />
+                        <label for="expire-box">Expiration Date:
+                        </label>
+                    </div>
+                    <div id="today">
+                        <input type="date" id="today-box" value="1970-01-01" disabled />
+                        <label for="today-box">Today:
+                        </label>
+                    </div>
+                    <div id="op2">-</div>
+                    <div id="birthday">
+                        <input type="date" id="birthday-box" value="1970-01-01"
+                               onchange="recalculateScore()" />
+                        <label for="birthday-box">Your Birthday:
+                        </label>
+                    </div>
+                    <hr />
+                    <div id="x100">× 100 =</div>
+                    <div id="result">00.00</div>
+                </form>
+            </article>
+        </main>
+
+        <script>
+            let now = new Date();
+            now.setHours(0, 0, 0, 0);
+            let found = document.getElementById("found-box");
+            found.valueAsDate = now;
+            let today = document.getElementById("today-box");
+            today.valueAsDate = now;
+            let expire = document.getElementById("expire-box");
+            expire.valueAsDate = new Date(now - 86400_000);
+            let birthday = document.getElementById("birthday-box");
+            birthday.valueAsDate = new Date(now - 86400_000 * 365 * 20);
+            function recalculateScore() {
+                now = new Date();
+                now.setHours(0, 0, 0, 0);
+                found.valueAsDate = now;
+                today.valueAsDate = now;
+                let numerator = now - expire.valueAsDate;
+                let denominator = now - birthday.valueAsDate;
+                let result = numerator / denominator * 100;
+                document.getElementById("result").innerText = result.toFixed(2).padStart(5, "0");
+            }
+            recalculateScore();
+        </script>
+
+    </body>
+
+</html>

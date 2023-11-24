@@ -1,0 +1,324 @@
+// loosely based on Material Design 2 guidelines (https://m2.material.io/)
+
+@use "reset";
+@use "material-symbols";
+@use "shadows";
+
+$primary: #bb86fc !default;
+$primary-variant: #3700b3 !default;
+$secondary: #03dac6 !default;
+$secondary-variant: #03dac6 !default;
+$background: #121212 !default;
+$surface: #242424 !default;
+$error: #cf6679 !default;
+$on-primary: #000000 !default;
+$on-secondary: #000000 !default;
+$on-background: #cccccc !default;
+$on-surface: #ffffff !default;
+$on-error: #000000 !default;
+$success: #66bb6a !default;
+
+$theme-is-dark: true !default;
+
+$animation-duration: 0.2s;
+$animation-timing-function: ease-in-out;
+
+.icon-button {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+    color: var(--content-colour);
+    @media (prefers-reduced-motion: no-preference) {
+        transition: background-color $animation-duration $animation-timing-function;
+    }
+    &:hover,
+    &:focus {
+        outline: none;
+        background-color: var(--content-border);
+    }
+    margin-right: auto;
+}
+
+body {
+    height: auto;
+    text-transform: uppercase;
+    background-color: $background;
+    text-align: center;
+    color: $on-background;
+    --content-colour: #{$on-background};
+    --content-border: #{rgba($on-background, 16%)};
+    --background: #{$background};
+    display: grid;
+    grid-template-areas:
+        "header header header"
+        "_left main _right";
+    grid-template-rows: 64px 1fr;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 16px 1fr 16px;
+    }
+    @media (min-width: 601px) and (max-width: 905px) {
+        grid-template-columns: 32px 1fr 32px;
+    }
+    @media (min-width: 906px) and (max-width: 1240px) {
+        grid-template-columns: 1fr 840px 1fr;
+    }
+    @media (min-width: 1241px) and (max-width: 1440px) {
+        grid-template-columns: 200px 1fr 200px;
+    }
+    @media (min-width: 1441px) {
+        grid-template-columns: 1fr 1040px 1fr;
+    }
+}
+
+.icon {
+    padding: 8px;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    grid-area: header;
+    @extend %elevation-12;
+    width: 100%;
+    height: 64px;
+    line-height: 64px;
+    z-index: 50;
+    @if $theme-is-dark {
+        background-color: $surface;
+        color: $on-surface;
+        --content-colour: #{$on-surface};
+        --content-border: #{rgba($on-surface, 16%)};
+        --background: #{$surface};
+    } @else {
+        background-color: $primary;
+        color: $on-primary;
+        --content-colour: #{$on-primary};
+        --content-border: #{rgba($on-primary, 16%)};
+        --background: #{$primary};
+    }
+    text-align: center;
+    margin-bottom: 16px;
+    & > h1 {
+        font-size: 36px;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+button,
+[role="button"] {
+    @extend %elevation-2;
+    @extend %shadow-transition;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primary;
+    color: $on-primary;
+    text-align: center;
+    margin: 8px;
+    height: 48px;
+    padding: 16px;
+    line-height: calc(2em - 32px);
+    border-radius: 8px;
+    &:hover {
+        @extend %elevation-6;
+    }
+    &:disabled {
+        background-color: var(--content-border);
+        color: var(--content-colour);
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    grid-area: main;
+    gap: 16px;
+    z-index: 10;
+    padding: 16px 0;
+    text-align: center;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: filter $animation-duration $animation-timing-function;
+    }
+}
+
+a {
+    text-decoration: none;
+    &:not([role="button"]) {
+        color: $primary;
+        &:visited {
+            color: $secondary;
+        }
+        font-weight: bold;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+    &[role="button"] {
+        padding-left: 4px;
+    }
+}
+
+hr {
+    border-color: var(--content-border);
+}
+
+article {
+    @extend %elevation-2;
+    text-align: left;
+    border-radius: 16px;
+    background-color: $surface;
+    color: $on-surface;
+    --content-colour: #{$on-surface};
+    --content-border: #{rgba($on-surface, 16%)};
+    --background: #{$surface};
+    padding: 16px;
+    &:has(> hr:last-child) {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    &:has(> hr:first-child) {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    & > form {
+        display: grid;
+        grid-template-areas:
+            "score found op1 expired_ x100 result"
+            "score div   div div      x100 result"
+            "score today op2 birthday x100 result";
+        grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+        & > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        & > #score {
+            grid-area: score;
+        }
+        & > #found {
+            grid-area: found;
+        }
+        & > #op1 {
+            grid-area: op1;
+        }
+        & > #expire {
+            grid-area: expired_;
+        }
+        & > #today {
+            grid-area: today;
+        }
+        & > #op2 {
+            grid-area: op2;
+        }
+        & > #birthday {
+            grid-area: birthday;
+        }
+        & > #x100 {
+            grid-area: x100;
+        }
+        & > #result {
+            grid-area: result;
+        }
+        & > hr {
+            grid-area: div;
+        }
+    }
+}
+
+label {
+    position: absolute;
+    top: 10px;
+    left: 14px;
+    color: var(--content-border);
+    background-color: var(--background);
+    padding: 0 4px;
+    @media (prefers-reduced-motion: no-preference) {
+        transition:
+            color $animation-duration $animation-timing-function,
+            opacity $animation-duration $animation-timing-function,
+            top $animation-duration $animation-timing-function,
+            left $animation-duration $animation-timing-function,
+            font-size $animation-duration $animation-timing-function;
+    }
+    :focus-within > &,
+    :where([role="textbox"]:not(:empty), input:not(:placeholder-shown), select) ~ & {
+        top: 4px;
+        left: 18px;
+        font-size: 0.8em;
+    }
+    :focus-within > & {
+        opacity: 1;
+        color: $primary;
+    }
+}
+p[role="textbox"],
+input,
+select {
+    display: block;
+    background: transparent;
+    line-height: 1.6;
+    margin: 16px 8px;
+    padding: 8px;
+    padding-top: 18px;
+    width: calc(100% - 16px);
+    min-height: calc(1em + 16px);
+    border-radius: 8px;
+    color: var(--content-colour);
+    border: 2px solid;
+    border-color: var(--content-border);
+    position: sticky;
+    @media (prefers-reduced-motion: no-preference) {
+        transition: border-color $animation-duration $animation-timing-function;
+    }
+    &:focus {
+        outline: none;
+        border-color: $primary;
+    }
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    &::-ms-expand {
+        display: none;
+    }
+
+    &:disabled {
+        color: var(--content-border);
+        cursor: not-allowed;
+    }
+}
+
+input[type="date"] {
+    position: relative;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    color: transparent;
+    background: none;
+    z-index: 1;
+}
+
+input[type="date"]:before {
+    color: transparent;
+    background: none;
+    display: block;
+    font-family: "Material Symbols Outlined";
+    content: "calendar_today";
+    line-height: 1;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    width: 15px;
+    height: 20px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: var(--content-colour);
+}
