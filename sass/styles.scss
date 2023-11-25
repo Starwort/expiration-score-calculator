@@ -193,7 +193,7 @@ article {
             "score found op1 expired_ x100 result"
             "score div   div div      x100 result"
             "score today op2 birthday x100 result";
-        grid-template-columns: 1fr 2fr 2fr 1fr 1fr;
+        grid-template-columns: 2fr 4fr 1fr 4fr 2fr 2fr;
         & > div {
             display: flex;
             justify-content: center;
